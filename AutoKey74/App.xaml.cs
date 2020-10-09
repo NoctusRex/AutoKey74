@@ -8,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Unity;
+using Unity.Lifetime;
 
 namespace AutoKey74
 {
@@ -19,6 +21,8 @@ namespace AutoKey74
         private Mutex mutex;
         private bool handleExceptions = false;
 
+        internal static IUnityContainer UnityContainer { get; } = new UnityContainer();
+
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = handleExceptions;
@@ -29,8 +33,9 @@ namespace AutoKey74
         protected override void OnStartup(StartupEventArgs e)
         {
             CheckAlreadyRunning();
+            UnityConfiguration.Register(UnityContainer);
 
-            base.OnStartup(e);
+            UnityContainer.Resolve<MainWindow>().Show();
         }
 
         private void CheckAlreadyRunning()
@@ -48,6 +53,8 @@ namespace AutoKey74
             mutex?.Close();
             mutex?.Dispose();
             mutex = null;
+
+            UnityContainer.Dispose();
 
             base.OnExit(e);
         }

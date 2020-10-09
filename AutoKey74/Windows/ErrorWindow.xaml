@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoKey74.Windows"
         mc:Ignorable="d"
-        Title="Error" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Error" Height="450" Width="800" ResizeMode="NoResize" Icon="/AutoKey74;component/Resources/Icon.ico" >
     <Window.Resources>
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{x:Null}" />
