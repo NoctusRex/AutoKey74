@@ -66,6 +66,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsInput, Version=6.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsInput.6.1.1\lib\net461\WindowsInput.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -73,9 +76,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
+    <Compile Include="Configurations\AutoKeyConfiguration.cs" />
     <Compile Include="Configurations\ConfigurationLoader.cs" />
     <Compile Include="Hotkeys\GlobalHotkey.cs" />
     <Compile Include="Hotkeys\HotkeyConstants.cs" />
+    <Compile Include="Models\AutoKey.cs" />
+    <Compile Include="Models\KeyModes.cs" />
+    <Compile Include="Modules\AutoKeys\AutoKeysControl.xaml.cs">
+      <DependentUpon>AutoKeysControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ContextMenu\ContextMenuControl.xaml.cs">
+      <DependentUpon>ContextMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IModule.cs" />
     <Compile Include="UnityConfiguration.cs" />
     <Compile Include="Utils\Pathmanager.cs" />
     <Compile Include="Windows\ErrorWindow.xaml.cs">
@@ -93,6 +106,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\AutoKeys\AutoKeysControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ContextMenu\ContextMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ErrorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,10 +147,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Models\" />
     <Folder Include="Modules\About\" />
-    <Folder Include="Modules\AutoKeys\" />
     <Folder Include="Modules\Settings\" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +159,9 @@
     <Resource Include="Resources\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include=".nuget\mouse-keyboard-hook-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

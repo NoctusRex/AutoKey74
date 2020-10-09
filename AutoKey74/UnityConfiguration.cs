@@ -9,12 +9,19 @@ namespace AutoKey74
         public static void Register(IUnityContainer container)
         {
             RegisterWindows(container);
+            RegisterModules(container);
             RegisterConfiguration(container);
         }
 
         private static void RegisterWindows(IUnityContainer container)
         {
             container.RegisterSingleton<MainWindow>();
+        }
+
+        private static void RegisterModules(IUnityContainer container)
+        {
+            container.RegisterSingleton<Modules.ContextMenu.ContextMenuControl>();
+            container.RegisterSingleton<Modules.AutoKeys.AutoKeysControl>();
         }
 
         private static void RegisterConfiguration(IUnityContainer container)

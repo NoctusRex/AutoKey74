@@ -1,7 +1,10 @@
 ﻿using AutoKey74.Configurations;
 using AutoKey74.Hotkeys;
+using AutoKey74.Modules.AutoKeys;
+using AutoKey74.Modules.ContextMenu;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Unity;
 using MessageBox = System.Windows.MessageBox;
@@ -23,9 +26,12 @@ namespace AutoKey74
 
 
         #region Dependency Injection
-        
+
         [Dependency]
         public ApplicationConfiguration ApplicationConfiguration { get; set; }
+
+        [Dependency]
+        public IUnityContainer UnityContainer { get; set; }
 
         #endregion
 
@@ -40,6 +46,7 @@ namespace AutoKey74
         {
             InitializeHotkeys();
             InitializeNotifyIcon();
+            ChangeTo<AutoKeysControl>();
         }
 
         private void InitializeHotkeys()
@@ -69,6 +76,16 @@ namespace AutoKey74
 
         #endregion
 
+        #region Functions
+
+        public void ChangeTo<T>() where T: UIElement
+        {
+            StackPanelModule.Children.Clear();
+            StackPanelModule.Children.Add(UnityContainer.Resolve<T>());
+        }
+
+        #endregion
+
         #region Events
 
         private void StartStopHotkeyPressed(object sender, EventArgs e)
@@ -92,9 +109,10 @@ namespace AutoKey74
             Hide();
         }
 
-        private void Window_StateChanged(object sender, EventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (WindowState == WindowState.Minimized) MinimizeToIcon();
+            MinimizeToIcon();
+            e.Cancel = true;
         }
 
         #endregion
@@ -107,6 +125,7 @@ namespace AutoKey74
         }
 
         #endregion
+
 
     }
 }
