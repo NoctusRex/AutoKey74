@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoKey74.Windows;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -22,7 +23,7 @@ namespace AutoKey74
         {
             e.Handled = handleExceptions;
 
-            MessageBox.Show(e.Exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrorWindow.Show(e.Exception);
         }
 
         protected override void OnStartup(StartupEventArgs e)
