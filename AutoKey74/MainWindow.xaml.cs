@@ -24,7 +24,6 @@ namespace AutoKey74
 
         #endregion
 
-
         #region Dependency Injection
 
         [Dependency]
@@ -51,7 +50,7 @@ namespace AutoKey74
 
         private void InitializeHotkeys()
         {
-            StartStopHotkey = new GlobalHotkey(HotkeyConstants.NOMOD, Keys.Pause, this, StartStopHotkeyPressed);
+            StartStopHotkey = new GlobalHotkey(HotkeyConstants.NOMOD, ApplicationConfiguration.StartStopHotKey, this, StartStopHotkeyPressed);
             StartStopHotkey.Register();
         }
 
@@ -104,6 +103,8 @@ namespace AutoKey74
 
         private void MinimizeToIcon()
         {
+            if (NotifyIcon is null) return;
+
             NotifyIcon.Visible = true;
             ShowInTaskbar = false;
             Hide();
@@ -125,7 +126,6 @@ namespace AutoKey74
         }
 
         #endregion
-
 
     }
 }

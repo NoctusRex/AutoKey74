@@ -7,7 +7,7 @@
              mc:Ignorable="d" Width="159.333" Height="240.667" HorizontalAlignment="Right" VerticalAlignment="Top">
     <Grid>
         <Button x:Name="ContextMenu" Content="Menu" HorizontalAlignment="Right" Height="43" VerticalAlignment="Top" Width="49" Click="ContextMenu_Click"/>
-        <Grid x:Name="GridContextMenu" Background="White" Margin="0,43,0,0">
+        <Grid x:Name="GridContextMenu" Background="#7F6E6A6A" Margin="0,43,0,0">
             <Button x:Name="AutoKeysButton" Content="Auto Keys" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="139" Height="41" Click="AutoKeysButton_Click"/>
             <Button x:Name="SettingsButton" Content="Settings" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="139" Height="41" Click="SettingsButton_Click"/>
             <Button x:Name="AboutButton" Content="About" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="139" Height="41" Click="AboutButton_Click"/>

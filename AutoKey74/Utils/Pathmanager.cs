@@ -5,7 +5,7 @@ namespace AutoKey74.Utils
 {
     public class Pathmanager
     {
-        public string StartupDirectory { get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); } }
+        public string StartupDirectory { get => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); }
 
         public string ConfigurationDirectory
         {
@@ -16,6 +16,8 @@ namespace AutoKey74.Utils
                 return configPath;
             }
         }
+
+        public string ApplicationConfiguration { get => CombineConfigurationPath("application.configuration.json"); }
 
         public string CombineConfigurationPath(string file) => Path.Combine(ConfigurationDirectory, file);
 

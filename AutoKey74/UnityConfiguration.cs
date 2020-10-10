@@ -22,6 +22,8 @@ namespace AutoKey74
         {
             container.RegisterSingleton<Modules.ContextMenu.ContextMenuControl>();
             container.RegisterSingleton<Modules.AutoKeys.AutoKeysControl>();
+            container.RegisterSingleton<Modules.Settings.SettingsControl>();
+            container.RegisterSingleton<Modules.About.AboutControl>();
         }
 
         private static void RegisterConfiguration(IUnityContainer container)
@@ -29,7 +31,7 @@ namespace AutoKey74
             Pathmanager pathmanager = new Pathmanager();
             container.RegisterInstance(pathmanager);
 
-            container.RegisterInstance(typeof(ApplicationConfiguration), ConfigurationLoader.Load<ApplicationConfiguration>(pathmanager.CombineConfigurationPath("application.configuration.json")));
+            container.RegisterInstance(typeof(ApplicationConfiguration), ConfigurationLoader.Load<ApplicationConfiguration>(pathmanager.ApplicationConfiguration));
         }
 
     }

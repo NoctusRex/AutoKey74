@@ -1,4 +1,6 @@
-﻿using AutoKey74.Modules.AutoKeys;
+﻿using AutoKey74.Modules.About;
+using AutoKey74.Modules.AutoKeys;
+using AutoKey74.Modules.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,16 +53,19 @@ namespace AutoKey74.Modules.ContextMenu
         private void AutoKeysButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.ChangeTo<AutoKeysControl>();
+            Expanded = false;
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.ChangeTo<ContextMenuControl>();
+            MainWindow.ChangeTo<SettingsControl>();
+            Expanded = false;
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.ChangeTo<AboutControl>();
+            Expanded = false;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

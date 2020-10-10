@@ -82,6 +82,9 @@
     <Compile Include="Hotkeys\HotkeyConstants.cs" />
     <Compile Include="Models\AutoKey.cs" />
     <Compile Include="Models\KeyModes.cs" />
+    <Compile Include="Modules\About\AboutControl.xaml.cs">
+      <DependentUpon>AboutControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\AutoKeys\AutoKeysControl.xaml.cs">
       <DependentUpon>AutoKeysControl.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,12 @@
       <DependentUpon>ContextMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\Settings\SettingControl.xaml.cs">
+      <DependentUpon>SettingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnityConfiguration.cs" />
     <Compile Include="Utils\Pathmanager.cs" />
     <Compile Include="Windows\ErrorWindow.xaml.cs">
@@ -106,11 +115,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\About\AboutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\AutoKeys\AutoKeysControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\ContextMenu\ContextMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Settings\SettingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Settings\SettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,8 +168,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\About\" />
-    <Folder Include="Modules\Settings\" />
+    <Resource Include="Resources\Warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ErrorQR.png">
@@ -162,6 +184,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include=".nuget\mouse-keyboard-hook-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

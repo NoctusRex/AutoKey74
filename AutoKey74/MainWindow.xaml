@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoKey74"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Icon="Resources/Icon.ico" Closing="Window_Closing">
+        Title="MainWindow" Height="500" Width="900" Loaded="Window_Loaded" Icon="Resources/Icon.ico" Closing="Window_Closing" MinWidth="900" MinHeight="500">
     <Grid x:Name="GridMain">
-        <StackPanel x:Name="StackPanelModule" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"/>
+        <StackPanel x:Name="StackPanelModule" Margin="10"/>
     </Grid>
 </Window>
