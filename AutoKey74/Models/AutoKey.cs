@@ -11,5 +11,8 @@ namespace AutoKey74.Models
         public KeyModes KeyMode { get; set; }
         public int Intervall { get; set; }
         public int Duration { get; set; }
+
+        public override string ToString() => $"{Application} - {KeyMode} - {Intervall}ms - {Duration}ms - {string.Join(", ", Keys)}";
+
     }
 }

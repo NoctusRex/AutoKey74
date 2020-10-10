@@ -19,6 +19,8 @@ namespace AutoKey74.Utils
 
         public string ApplicationConfiguration { get => CombineConfigurationPath("application.configuration.json"); }
 
+        public string AutoKeyConfiguration { get => CombineConfigurationPath("autokey.configuration.json"); }
+
         public string CombineConfigurationPath(string file) => Path.Combine(ConfigurationDirectory, file);
 
     }

@@ -24,6 +24,7 @@ namespace AutoKey74
             container.RegisterSingleton<Modules.AutoKeys.AutoKeysControl>();
             container.RegisterSingleton<Modules.Settings.SettingsControl>();
             container.RegisterSingleton<Modules.About.AboutControl>();
+            container.RegisterSingleton<Modules.AutoKeys.AutoKeyEditControl>();
         }
 
         private static void RegisterConfiguration(IUnityContainer container)
@@ -32,6 +33,7 @@ namespace AutoKey74
             container.RegisterInstance(pathmanager);
 
             container.RegisterInstance(typeof(ApplicationConfiguration), ConfigurationLoader.Load<ApplicationConfiguration>(pathmanager.ApplicationConfiguration));
+            container.RegisterInstance(typeof(AutoKeyConfiguration), ConfigurationLoader.Load<AutoKeyConfiguration>(pathmanager.AutoKeyConfiguration));
         }
 
     }

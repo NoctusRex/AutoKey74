@@ -88,6 +88,12 @@
     <Compile Include="Modules\AutoKeys\AddAutoKeyControl.xaml.cs">
       <DependentUpon>AddAutoKeyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\AutoKeys\AutoKeyDisplayControl.xaml.cs">
+      <DependentUpon>AutoKeyDisplayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AutoKeys\AutoKeyEditControl.xaml.cs">
+      <DependentUpon>AutoKeyEditControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\AutoKeys\AutoKeysControl.xaml.cs">
       <DependentUpon>AutoKeysControl.xaml</DependentUpon>
     </Compile>
@@ -123,6 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\AutoKeys\AddAutoKeyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\AutoKeys\AutoKeyDisplayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\AutoKeys\AutoKeyEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

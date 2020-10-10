@@ -30,7 +30,7 @@ namespace AutoKey74.Modules.ContextMenu
         private bool expanded;
         public bool Expanded
         {
-            get => expanded; 
+            get => expanded;
             set
             {
                 expanded = value;
@@ -83,7 +83,10 @@ namespace AutoKey74.Modules.ContextMenu
             if (expand)
                 GridContextMenu.Visibility = Visibility.Visible;
             else
+            {
                 GridContextMenu.Visibility = Visibility.Collapsed;
+                ImageButton.Source = new BitmapImage(new Uri(@"pack://application:,,,/AutoKey74;component/Resources/ContextMenuBlack.png"));
+            }
         }
 
         private void ContextMenu_MouseEnter(object sender, MouseEventArgs e)
@@ -100,7 +103,6 @@ namespace AutoKey74.Modules.ContextMenu
         private void GridContextMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             if (Expanded) Expanded = false;
-            ImageButton.Source = new BitmapImage(new Uri(@"pack://application:,,,/AutoKey74;component/Resources/ContextMenuBlack.png"));
         }
     }
 }
