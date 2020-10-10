@@ -27,6 +27,14 @@ namespace AutoKey74.Modules.AutoKeys
 
         public void Initialize()
         {
+            StackPanelAutoKeys.Children.Clear();
+            StackPanelAutoKeys.Children.Add(new AddAutoKeyControl(AddAutoKey));
         }
+
+        private void AddAutoKey()
+        {
+            MessageBox.Show("test");
+        }
+
     }
 }

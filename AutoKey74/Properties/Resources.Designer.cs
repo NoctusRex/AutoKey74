@@ -63,6 +63,26 @@ namespace AutoKey74.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ContextMenuBlack {
+            get {
+                object obj = ResourceManager.GetObject("ContextMenuBlack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ContextMenuOrange {
+            get {
+                object obj = ResourceManager.GetObject("ContextMenuOrange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ErrorQR {
             get {
                 object obj = ResourceManager.GetObject("ErrorQR", resourceCulture);

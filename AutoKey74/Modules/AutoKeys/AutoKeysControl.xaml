@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AutoKey74.Modules.AutoKeys"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" MinWidth="800" MinHeight="450">
     <Grid>
+        <Label Content="Auto Keys" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" MinHeight="2" FontSize="36" Width="171"/>
+        <StackPanel x:Name="StackPanelAutoKeys" Margin="10,73,10,10" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True"/>
     </Grid>
 </UserControl>

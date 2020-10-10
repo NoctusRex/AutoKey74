@@ -86,6 +86,21 @@ namespace AutoKey74.Modules.ContextMenu
                 GridContextMenu.Visibility = Visibility.Collapsed;
         }
 
-   
+        private void ContextMenu_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ImageButton.Source = new BitmapImage(new Uri(@"pack://application:,,,/AutoKey74;component/Resources/ContextMenuOrange.png"));
+        }
+
+        private void ContextMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Expanded) return;
+            ImageButton.Source = new BitmapImage(new Uri(@"pack://application:,,,/AutoKey74;component/Resources/ContextMenuBlack.png"));
+        }
+
+        private void GridContextMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Expanded) Expanded = false;
+            ImageButton.Source = new BitmapImage(new Uri(@"pack://application:,,,/AutoKey74;component/Resources/ContextMenuBlack.png"));
+        }
     }
 }
