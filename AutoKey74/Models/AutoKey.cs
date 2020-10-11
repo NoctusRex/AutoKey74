@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
+using WindowsInput.Native;
 
 namespace AutoKey74.Models
 {
@@ -7,7 +7,7 @@ namespace AutoKey74.Models
     {
         public string Application { get; set; }
         public bool Enabled { get; set; }
-        public IEnumerable<Keys> Keys { get; set; }
+        public IEnumerable<VirtualKeyCode> Keys { get; set; }
         public KeyModes KeyMode { get; set; }
         public int Intervall { get; set; }
         public int Duration { get; set; }

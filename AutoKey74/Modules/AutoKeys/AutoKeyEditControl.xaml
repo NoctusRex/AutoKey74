@@ -30,8 +30,11 @@
 
         <Label Content="Keys" HorizontalAlignment="Center" Margin="230,248,524,0" VerticalAlignment="Top" FontSize="18"/>
         <ComboBox x:Name="ComboBoxKeys" HorizontalAlignment="Center" Margin="329,253,229,0" VerticalAlignment="Top" Width="242" FontSize="18" Height="26" SelectionChanged="ComboBoxKeys_SelectionChanged"/>
-        <StackPanel x:Name="StackPanelKey" HorizontalAlignment="Center" Height="100" Margin="329,287,229,0" VerticalAlignment="Top" Width="242" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True"/>
-
+        <ScrollViewer HorizontalAlignment="Center" Height="100" Margin="329,287,229,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="StackPanelKey" CanVerticallyScroll="True" RenderTransformOrigin="0.5,0.5" Width="226">
+            </StackPanel>
+        </ScrollViewer>
+        
         <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Center" Margin="288,392,438,0" VerticalAlignment="Top" Width="74" FontSize="18" Click="ButtonCancel_Click"/>
         <Button x:Name="ButtonSave" Content="Save" HorizontalAlignment="Center" Margin="438,392,288,0" VerticalAlignment="Top" Width="74" FontSize="18" Click="ButtonSave_Click" />
     </Grid>

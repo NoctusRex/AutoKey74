@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AutoKey74.Modules.AutoKeys"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="800" BorderBrush="Black" BorderThickness="1"  Cursor="Hand" MouseDown="UserControl_MouseDown" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
-    <Grid Background="#00000000">
-        <Label x:Name="LabelAdd" Content="+" Margin="383,-12,383,0" VerticalAlignment="Top" FontSize="48" Height="42" FontWeight="ExtraBold" Cursor="Hand" Padding="0" HorizontalContentAlignment="Center" FontFamily="Arial" HorizontalAlignment="Center"/>
+             d:DesignHeight="50" d:DesignWidth="800" BorderBrush="Black" BorderThickness="1"  Cursor="Hand" MouseDown="UserControl_MouseDown" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Height="50" Width="800">
+    <Grid Background="#00000000" Margin="0,2" Height="46">
+        <Label x:Name="LabelAdd" Content="+" Margin="383,-2,383,0" VerticalAlignment="Top" FontSize="48" Height="42" FontWeight="ExtraBold" Cursor="Hand" Padding="0" HorizontalContentAlignment="Center" FontFamily="Arial" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

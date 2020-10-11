@@ -33,6 +33,9 @@ namespace AutoKey74.Modules.AutoKeys
         public AutoKeyEditControl AutoKeyEditModule { get; set; }
 
         [Dependency]
+        public MainWindow MainWindow { get; set; }
+
+        [Dependency]
         public Pathmanager Pathmanager { get; set; }
 
         public AutoKeysControl()
@@ -61,6 +64,8 @@ namespace AutoKey74.Modules.AutoKeys
 
             AutoKeyConfiguration.AutoKeys = AutoKeyConfiguration.AutoKeys.Append(autoKey);
             Save();
+
+            MainWindow.AddAutoKey(autoKey);
         }
 
         private void EditAutoKey(AutoKey autoKey)
@@ -73,6 +78,8 @@ namespace AutoKey74.Modules.AutoKeys
         {
             AutoKeyConfiguration.AutoKeys = AutoKeyConfiguration.AutoKeys.Except(new AutoKey[] { autoKey });
             Save();
+
+            MainWindow.RemoveAutoKey(autoKey);
         }
 
         private void ToggleAutoKey(AutoKey autoKey)

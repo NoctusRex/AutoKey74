@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Unity;
+using WindowsInput.Native;
 using Application = System.Windows.Application;
 using Button = System.Windows.Controls.Button;
 using TextBox = System.Windows.Controls.TextBox;
@@ -50,6 +51,7 @@ namespace AutoKey74.Modules.AutoKeys
         {
             AutoKey = null;
             LabelTitle.Content = "Add";
+            Initialize();
             MainWindow.ChangeTo<AutoKeyEditControl>();
 
             ContextMenuModul.Expanded = false;
@@ -68,20 +70,22 @@ namespace AutoKey74.Modules.AutoKeys
         public void Edit(AutoKey autoKey)
         {
             LabelTitle.Content = "Edit";
+            Initialize();
             MainWindow.ChangeTo<AutoKeyEditControl>();
 
             ContextMenuModul.Expanded = false;
             ContextMenuModul.IsEnabled = false;
             IsOpen = true;
 
+            AutoKey = autoKey;
             TextBoxApplication.Text = AutoKey?.Application;
             TextBoxDuration.Text = AutoKey?.Duration.ToString();
             TextBoxIntervall.Text = AutoKey?.Intervall.ToString();
             CheckBoxEnabled.IsChecked = AutoKey?.Enabled;
             ComboBoxKeyMode.SelectedItem = AutoKey?.KeyMode;
-            ComboBoxKeys.SelectedItem = Keys.None;
+            ComboBoxKeys.SelectedItem = VirtualKeyCode.NONAME;
 
-            foreach (Keys key in autoKey.Keys)
+            foreach (VirtualKeyCode key in AutoKey.Keys)
                 AddKeyButton(key);
 
             while (IsOpen) { DoEvents(); }
@@ -98,8 +102,8 @@ namespace AutoKey74.Modules.AutoKeys
             ComboBoxKeyMode.SelectedItem = KeyModes.Click;
             TextBoxDuration.IsEnabled = false;
 
-            ComboBoxKeys.ItemsSource = Enum.GetValues(typeof(Keys));
-            ComboBoxKeys.SelectedItem = Keys.None;
+            ComboBoxKeys.ItemsSource = Enum.GetValues(typeof(VirtualKeyCode));
+            ComboBoxKeys.SelectedItem = VirtualKeyCode.NONAME;
         }
 
         private void TextBoxIntervall_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -129,20 +133,31 @@ namespace AutoKey74.Modules.AutoKeys
         {
             if (string.IsNullOrEmpty(TextBoxIntervall.Text)) return;
             if (StackPanelKey.Children.Count <= 0) return;
+            List<VirtualKeyCode> keys = new List<VirtualKeyCode>();
 
-            List<Keys> keys = new List<Keys>();
-
-            AutoKey = new AutoKey()
+            if (AutoKey is null)
             {
-                Application = TextBoxApplication.Text,
-                Duration = string.IsNullOrEmpty(TextBoxDuration.Text) ? 0 : int.Parse(TextBoxDuration.Text),
-                Intervall = int.Parse(TextBoxIntervall.Text),
-                Enabled = CheckBoxEnabled.IsEnabled,
-                KeyMode = (KeyModes)ComboBoxKeyMode.SelectedItem,
-            };
+
+                AutoKey = new AutoKey()
+                {
+                    Application = TextBoxApplication.Text,
+                    Duration = string.IsNullOrEmpty(TextBoxDuration.Text) ? 0 : int.Parse(TextBoxDuration.Text),
+                    Intervall = int.Parse(TextBoxIntervall.Text),
+                    Enabled = (bool)CheckBoxEnabled.IsChecked,
+                    KeyMode = (KeyModes)ComboBoxKeyMode.SelectedItem,
+                };
+            }
+            else
+            {
+                AutoKey.Application = TextBoxApplication.Text;
+                AutoKey.Duration = string.IsNullOrEmpty(TextBoxDuration.Text) ? 0 : int.Parse(TextBoxDuration.Text);
+                AutoKey.Intervall = int.Parse(TextBoxIntervall.Text);
+                AutoKey.Enabled = (bool)CheckBoxEnabled.IsChecked;
+                AutoKey.KeyMode = (KeyModes)ComboBoxKeyMode.SelectedItem;
+            }
 
             foreach (Button button in StackPanelKey.Children)
-                keys.Add((Keys)Enum.Parse(typeof(Keys), button.Content.ToString()));
+                keys.Add((VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), button.Content.ToString()));
 
             AutoKey.Keys = keys;
 
@@ -162,15 +177,18 @@ namespace AutoKey74.Modules.AutoKeys
 
         private void ComboBoxKeys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((Keys)ComboBoxKeys.SelectedItem == Keys.None) return;
+            if ((VirtualKeyCode)ComboBoxKeys.SelectedItem == VirtualKeyCode.NONAME) return;
 
-            AddKeyButton((Keys)ComboBoxKeys.SelectedItem);
+            AddKeyButton((VirtualKeyCode)ComboBoxKeys.SelectedItem);
 
-            ComboBoxKeys.SelectedItem = Keys.None;
+            ComboBoxKeys.SelectedItem = VirtualKeyCode.NONAME;
         }
 
-        private void AddKeyButton(Keys key)
+        private void AddKeyButton(VirtualKeyCode key)
         {
+            foreach (Button b in StackPanelKey.Children)
+                if (b.Content.ToString() == key.ToString()) return;
+
             Button button = new Button()
             {
                 Content = key.ToString()

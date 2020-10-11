@@ -1,13 +1,14 @@
 ﻿using AutoKey74.Configurations;
 using AutoKey74.Hotkeys;
+using AutoKey74.Models;
 using AutoKey74.Modules.AutoKeys;
-using AutoKey74.Modules.ContextMenu;
+using AutoKey74.Utils;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using Unity;
-using MessageBox = System.Windows.MessageBox;
 
 namespace AutoKey74
 {
@@ -22,12 +23,19 @@ namespace AutoKey74
         private GlobalHotkey StartStopHotkey { get; set; }
         private NotifyIcon NotifyIcon { get; set; }
 
+        private List<AutoKeyHandler> AutoKeyHandlers { get; set; }
+
+        private bool AutoKeysEnabled { get; set; }
+
         #endregion
 
         #region Dependency Injection
 
         [Dependency]
         public ApplicationConfiguration ApplicationConfiguration { get; set; }
+
+        [Dependency]
+        public AutoKeyConfiguration AutoKeyConfiguration { get; set; }
 
         [Dependency]
         public IUnityContainer UnityContainer { get; set; }
@@ -45,6 +53,13 @@ namespace AutoKey74
         {
             InitializeHotkeys();
             InitializeNotifyIcon();
+            AutoKeyHandlers = new List<AutoKeyHandler>();
+            AutoKeysEnabled = false;
+            ImageWarning.Visibility = Visibility.Hidden;
+
+            foreach (AutoKey autoKey in AutoKeyConfiguration.AutoKeys)
+                AddAutoKey(autoKey);
+
             ChangeTo<AutoKeysControl>();
         }
 
@@ -77,10 +92,25 @@ namespace AutoKey74
 
         #region Functions
 
-        public void ChangeTo<T>() where T: UIElement
+        public void ChangeTo<T>() where T : UIElement
         {
             StackPanelModule.Children.Clear();
             StackPanelModule.Children.Add(UnityContainer.Resolve<T>());
+        }
+
+        public void AddAutoKey(AutoKey autoKey)
+        {
+            AutoKeyHandler handler = new AutoKeyHandler(autoKey);
+            AutoKeyHandlers.Add(handler);
+
+            if (AutoKeysEnabled) handler.Start();
+        }
+
+        public void RemoveAutoKey(AutoKey autoKey)
+        {
+            AutoKeyHandler handler = AutoKeyHandlers.First(x => x.AutoKey == autoKey);
+            handler.Stop();
+            AutoKeyHandlers.Remove(handler);
         }
 
         #endregion
@@ -89,6 +119,20 @@ namespace AutoKey74
 
         private void StartStopHotkeyPressed(object sender, EventArgs e)
         {
+            AutoKeysEnabled = !AutoKeysEnabled;
+
+            if (AutoKeysEnabled)
+            {
+                ImageWarning.Visibility = Visibility.Visible;
+                foreach (AutoKeyHandler handler in AutoKeyHandlers)
+                    handler.Start();
+            }
+            else
+            {
+                ImageWarning.Visibility = Visibility.Hidden;
+                foreach (AutoKeyHandler handler in AutoKeyHandlers)
+                    handler.Stop();
+            }
 
         }
 
@@ -123,6 +167,9 @@ namespace AutoKey74
         public void Dispose()
         {
             StartStopHotkey.Dispose();
+            foreach (AutoKeyHandler handler in AutoKeyHandlers)
+                handler.Dispose();
+            AutoKeyHandlers = null;
         }
 
         #endregion
