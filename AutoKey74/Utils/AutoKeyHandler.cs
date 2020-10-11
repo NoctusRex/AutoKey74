@@ -13,11 +13,6 @@ namespace AutoKey74.Utils
 {
     public class AutoKeyHandler : IDisposable
     {
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         public AutoKey AutoKey { get; private set; }
         private Timer Timer { get; set; }
@@ -49,7 +44,7 @@ namespace AutoKey74.Utils
             IsRunning = true;
             Timer.Interval = AutoKey.Intervall;
 
-            if (!string.IsNullOrEmpty(AutoKey.Application) && GetCurrentWindowTitle(GetForegroundWindow()) != AutoKey.Application)
+            if (!string.IsNullOrEmpty(AutoKey.Application) && WinApi.GetCurrentWindowTitle() != AutoKey.Application)
             {
                 IsRunning = false;
                 return;
@@ -94,18 +89,6 @@ namespace AutoKey74.Utils
                 foreach (VirtualKeyCode key in AutoKey.Keys)
                     Simulator.Keyboard.KeyUp(key);
             }
-        }
-
-        private string GetCurrentWindowTitle(IntPtr handle)
-        {
-            const int nChars = 256;
-            StringBuilder Buff = new StringBuilder(nChars);
-
-            if (GetWindowText(handle, Buff, nChars) > 0)
-            {
-                return Buff.ToString();
-            }
-            return null;
         }
 
         public void Dispose()

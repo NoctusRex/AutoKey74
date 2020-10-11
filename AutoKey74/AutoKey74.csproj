@@ -113,6 +113,7 @@
     <Compile Include="UnityConfiguration.cs" />
     <Compile Include="Utils\AutoKeyHandler.cs" />
     <Compile Include="Utils\Pathmanager.cs" />
+    <Compile Include="Utils\WinApi.cs" />
     <Compile Include="Windows\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>

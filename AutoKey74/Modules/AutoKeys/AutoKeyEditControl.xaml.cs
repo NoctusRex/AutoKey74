@@ -1,5 +1,7 @@
 ﻿using AutoKey74.Models;
 using AutoKey74.Modules.ContextMenu;
+using AutoKey74.Utils;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -40,6 +43,8 @@ namespace AutoKey74.Modules.AutoKeys
 
         public bool IsOpen { get; private set; }
 
+        private System.Timers.Timer ApplicationTimer { get; set; }
+
         private AutoKey AutoKey { get; set; }
 
         public AutoKeyEditControl()
@@ -54,6 +59,7 @@ namespace AutoKey74.Modules.AutoKeys
             Initialize();
             MainWindow.ChangeTo<AutoKeyEditControl>();
 
+            ApplicationTimer.Start();
             ContextMenuModul.Expanded = false;
             ContextMenuModul.IsEnabled = false;
             IsOpen = true;
@@ -73,6 +79,7 @@ namespace AutoKey74.Modules.AutoKeys
             Initialize();
             MainWindow.ChangeTo<AutoKeyEditControl>();
 
+            ApplicationTimer.Start();
             ContextMenuModul.Expanded = false;
             ContextMenuModul.IsEnabled = false;
             IsOpen = true;
@@ -104,6 +111,20 @@ namespace AutoKey74.Modules.AutoKeys
 
             ComboBoxKeys.ItemsSource = Enum.GetValues(typeof(VirtualKeyCode));
             ComboBoxKeys.SelectedItem = VirtualKeyCode.NONAME;
+            ApplicationTimer = new System.Timers.Timer(500);
+            ApplicationTimer.Elapsed += UpdateApplication;
+        }
+
+        private void UpdateApplication(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LabelCurrentApplication.Content = $"'{WinApi.GetCurrentWindowTitle()}'";
+                if (WinApi.GetCurrentWindowTitle() == TextBoxApplication.Text)
+                    LabelCurrentApplication.Foreground = Brushes.Green;
+                else
+                    LabelCurrentApplication.Foreground = Brushes.Black;
+            });
         }
 
         private void TextBoxIntervall_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -212,6 +233,8 @@ namespace AutoKey74.Modules.AutoKeys
             ComboBoxKeyMode.SelectedItem = KeyModes.Click;
             ComboBoxKeys.SelectedItem = Keys.None;
             StackPanelKey.Children.Clear();
+            ApplicationTimer?.Stop();
+            ApplicationTimer?.Dispose();
         }
 
     }

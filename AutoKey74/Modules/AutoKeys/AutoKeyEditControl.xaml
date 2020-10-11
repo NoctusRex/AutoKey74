@@ -11,6 +11,7 @@
 
         <Label Content="Application" HorizontalAlignment="Center" Margin="230,80,470,0" VerticalAlignment="Top" FontSize="18"/>
         <TextBox x:Name="TextBoxApplication" HorizontalAlignment="Center" Height="26" Margin="329,84,229,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" FontSize="18"/>
+        <Label x:Name="LabelCurrentApplication" Content="" HorizontalAlignment="Center" Margin="576,80,10,0" VerticalAlignment="Top" FontSize="18" Width="214"/>
 
         <Label Content="Enabled" HorizontalAlignment="Center" Margin="230,114,498,0" VerticalAlignment="Top" FontSize="18"/>
         <CheckBox x:Name="CheckBoxEnabled" HorizontalAlignment="Center" Margin="0,116,114,0" VerticalAlignment="Top" Width="16" Height="15" RenderTransformOrigin="1.914,0.38">
@@ -34,7 +35,7 @@
             <StackPanel x:Name="StackPanelKey" CanVerticallyScroll="True" RenderTransformOrigin="0.5,0.5" Width="226">
             </StackPanel>
         </ScrollViewer>
-        
+
         <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Center" Margin="288,392,438,0" VerticalAlignment="Top" Width="74" FontSize="18" Click="ButtonCancel_Click"/>
         <Button x:Name="ButtonSave" Content="Save" HorizontalAlignment="Center" Margin="438,392,288,0" VerticalAlignment="Top" Width="74" FontSize="18" Click="ButtonSave_Click" />
     </Grid>
